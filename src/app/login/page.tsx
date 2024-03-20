@@ -1,14 +1,11 @@
-'use client';
-import { useSearchParams } from 'next/navigation';
+import { Params } from 'features/params';
 import { LoginButton } from '_entities/telegram/LoginButton';
 
-export default function Page() {
-  const params = useSearchParams();
-  console.log(params);
+export default function Login() {
   return (
-    <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
+    <div>
       <LoginButton />
-      {params}
+      <Params />
     </div>
   );
 }
