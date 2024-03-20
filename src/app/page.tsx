@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import { LoginButton } from '_entities/telegram/LoginButton';
+import { TelegramOnAuthButton } from '_entities/telegram/onAuth';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
     <div className={styles.main}>
-      <LoginButton />
+      <TelegramOnAuthButton />
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
