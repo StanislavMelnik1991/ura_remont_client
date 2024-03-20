@@ -11,6 +11,7 @@ const nextConfig = {
   env: {
     TG_BOT_NAME: process.env.TG_BOT_NAME,
     HOST: process.env.HOST,
+    API_URL: process.env.API_URL,
   },
   images: {
     remotePatterns: [

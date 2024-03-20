@@ -9,7 +9,6 @@ interface Props {
 export const LoginButton = ({ className }: Props) => {
   return (
     <div className={classNames(styles.wrapper, className)}>
-      <p>{`data-auth-url="${process.env.HOST}/login"`}</p>
       <div
         dangerouslySetInnerHTML={{
           __html: `<script async 
