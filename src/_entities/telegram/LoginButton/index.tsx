@@ -7,15 +7,16 @@ interface Props {
 }
 
 export const LoginButton = ({ className }: Props) => {
-  const url = `https://oauth.telegram.org/embed/${process.env.TG_BOT_NAME}?origin=${process.env.HOST}&request_access=write`;
+  // const url = `https://oauth.telegram.org/embed/${process.env.TG_BOT_NAME}?origin=${process.env.HOST}&request_access=write`;
   return (
     <div className={classNames(styles.wrapper, className)}>
-      <iframe
-        src={url}
-        width="100%"
-        height="100%"
-        frameBorder="0"
-        scrolling="no"
+      <script
+        async
+        src="https://telegram.org/js/telegram-widget.js?22"
+        data-telegram-login={process.env.TG_BOT_NAME}
+        data-size="medium"
+        data-userpic="false"
+        data-auth-url="https://admin.ship.cloudns.be/login"
       />
     </div>
   );
