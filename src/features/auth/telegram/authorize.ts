@@ -1,43 +1,22 @@
 'use server';
+import { AxiosError } from 'axios';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
 import { apiRouter } from 'shared/routes';
-import { adminClientRouter } from 'shared/routes/adminClient';
 
 const { scheme, baseRoute } = apiRouter.auth.telegram;
 
 type TgAuthSchemeType = z.infer<typeof scheme>;
 
 export const telegramAuth = async (data: TgAuthSchemeType) => {
-  if (!data) {
-    return;
-  }
-  const url = `${process.env.API_URL}/${baseRoute}`;
-  const {
-    telegramAuth: { baseRoute: telegramAuth },
-    admin: { baseRoute: adminRoute },
-  } = adminClientRouter;
-  const token = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      ...data,
-    }),
-  })
-    .then((response) => response.json())
-    .then((res: ResponseType) => {
-      if (res.statusCode) {
-        console.error('Error:', res.message);
-      } else if (res.token) {
-        return res.token;
-      }
-    })
-    .catch(() => redirect(telegramAuth));
-  if (token) {
+  const oldToken = cookies().get(TOKEN_NAME)?.value;
+  const { axios } = new Axios(oldToken);
+  try {
+    const {
+      data: { token },
+    } = await axios.post<ResponseType>(baseRoute, data);
     cookies().set({
       name: TOKEN_NAME,
       value: token,
@@ -45,8 +24,14 @@ export const telegramAuth = async (data: TgAuthSchemeType) => {
       httpOnly: true,
       sameSite: 'strict',
     });
-    redirect(adminRoute);
+    return { ok: true };
+  } catch (error) {
+    if (error instanceof AxiosError && error.response) {
+      console.error('authorization error', error.response.data);
+    } else {
+      console.error(error);
+    }
   }
 };
 
-type ResponseType = { token?: string; message?: string; statusCode?: number };
+type ResponseType = { token: string };
