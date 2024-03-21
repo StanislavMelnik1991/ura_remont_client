@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
-import { GlobalLayout } from '_app/layouts';
+import { GlobalLayout } from 'widgets/layouts';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
