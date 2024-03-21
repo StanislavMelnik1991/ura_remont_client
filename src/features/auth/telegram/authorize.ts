@@ -30,6 +30,7 @@ export const telegramAuth = async (data: TgAuthSchemeType) => {
     } else {
       console.error(error);
     }
+    return { ok: false };
   }
 };
 

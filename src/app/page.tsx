@@ -4,7 +4,7 @@ import { adminClientRouter } from 'shared/routes/adminClient';
 
 export default async function Home() {
   const successUrl = adminClientRouter.admin.baseRoute;
-  const telegramAuth = adminClientRouter.telegramAuth.baseRoute;
+  const telegramAuth = adminClientRouter.login.baseRoute;
   const { isAuthorize } = await validateAuth();
   if (isAuthorize) {
     redirect(successUrl);

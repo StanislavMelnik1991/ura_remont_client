@@ -1,1 +1,1 @@
-export * from './TelegramLogin';
+export * from './authorize';

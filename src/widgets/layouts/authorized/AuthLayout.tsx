@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const AuthLayout = async ({ children }: Props) => {
-  const telegramAuth = adminClientRouter.telegramAuth.baseRoute;
+  const telegramAuth = adminClientRouter.login.baseRoute;
   const { isAuthorize } = await validateAuth();
   if (isAuthorize) {
     return <>{children}</>;
