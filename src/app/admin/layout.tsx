@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { AuthLayout } from 'widgets/layouts/authorized';
+import { AuthLayout, UserLayout } from 'widgets/layouts';
 
 export const metadata: Metadata = {
   title: 'Admin',
@@ -10,5 +10,9 @@ type Props = {
 };
 
 export default function RootLayout({ children }: Props) {
-  return <AuthLayout>{children}</AuthLayout>;
+  return (
+    <AuthLayout>
+      <UserLayout>{children}</UserLayout>
+    </AuthLayout>
+  );
 }

@@ -9,7 +9,7 @@
 ::-webkit-scrollbar-thumb {
   background-color: rgba(var(--callout-rgb), 0.8);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-lg);
   cursor: grab;
 
   &:hover {

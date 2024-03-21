@@ -1,4 +1,46 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
+  padding-top: var(--padding-xl);
+
+}
+.list {
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100%;
+  gap: var(--padding-xl);
+  :nth-child(n) {
+    width: calc((100% - 2 * var(--padding-xl))/3);
+  }
+
+  @media screen and (max-width: 1024px) {
+    gap: var(--padding-lg);
+    :nth-child(n) {
+      width: calc((100% - var(--padding-lg))/2);
+    }
+  }
+
+  @media screen and (max-width: 740px) {
+    gap: var(--padding-md);
+    :nth-child(n) {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    gap: var(--padding-sm);
+    
+  }
+
+  @media screen and (max-width: 360px) {
+    gap: var(--padding-xs);
+  }
+}
+.element {
+  height: 500px;
+  min-width: 240px;
 }

@@ -1,5 +1,5 @@
 'use client';
-import { LoginButton } from '_entities/ui';
+import { TelegramLoginButton } from 'widgets/telegram';
 import { adminClientRouter } from 'shared/routes/adminClient';
 import styles from './Login.module.scss';
 
@@ -7,7 +7,7 @@ export const Login = () => {
   const telegramAuth = adminClientRouter.login.telegramAuth.baseRoute;
   return (
     <div className={styles.main}>
-      <LoginButton
+      <TelegramLoginButton
         botName={process.env.TG_BOT_NAME as string}
         redirect={telegramAuth}
         displayAvatar={false}

@@ -9,7 +9,7 @@ interface Props {
   displayAvatar?: boolean;
 }
 
-export const LoginButton = ({
+export const TelegramLoginButton = ({
   botName,
   redirect,
   radius = 10,
