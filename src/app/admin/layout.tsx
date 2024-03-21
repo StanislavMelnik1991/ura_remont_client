@@ -1,4 +1,9 @@
+import { Metadata } from 'next';
 import { AuthLayout } from 'widgets/layouts/authorized';
+
+export const metadata: Metadata = {
+  title: 'Admin',
+};
 
 type Props = {
   children: React.ReactNode;

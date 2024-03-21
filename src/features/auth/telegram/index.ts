@@ -1,1 +1,1 @@
-export * from './authorize';
+export { useTelegramLogin } from './useLogin';

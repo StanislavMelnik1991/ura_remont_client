@@ -22,6 +22,7 @@ export const telegramAuth = async (data: TgAuthSchemeType) => {
       value: token,
       secure: true,
       httpOnly: true,
+      sameSite: 'strict',
     });
     return { ok: true };
   } catch (error) {
@@ -30,8 +31,8 @@ export const telegramAuth = async (data: TgAuthSchemeType) => {
     } else {
       console.error(error);
     }
-    return { ok: false };
   }
+  return { ok: false };
 };
 
 type ResponseType = { token: string };

@@ -5,7 +5,6 @@ import styles from './Login.module.scss';
 
 export const Login = () => {
   const telegramAuth = adminClientRouter.login.telegramAuth.baseRoute;
-  console.log(telegramAuth);
   return (
     <div className={styles.main}>
       <LoginButton
