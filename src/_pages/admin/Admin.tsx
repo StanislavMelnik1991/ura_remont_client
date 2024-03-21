@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { Card } from '_entities/ui/Card/Card';
+import { adminClientRouter } from 'shared/routes/adminClient';
 import styles from './Admin.module.scss';
 
 interface NavElement {
@@ -11,8 +12,8 @@ interface NavElement {
 
 export const Admin = () => {
   const navigationScheme: Array<NavElement> = [
-    { link: '/', title: 'Brand' },
-    { link: '/', title: 'Type' },
+    { link: adminClientRouter.admin.brand.baseRoute, title: 'Brand' },
+    { link: adminClientRouter.admin.type.baseRoute, title: 'Type' },
     { link: '/', title: 'Prototype' },
     { link: '/', title: 'Product' },
   ];

@@ -5,7 +5,7 @@ export class Axios {
   constructor(token?: string) {
     this.axios = axios.create({
       baseURL: process.env.API_URL,
-      headers: { Authorization: token },
+      headers: { Authorization: `Bearer ${token}` },
     });
   }
 }
