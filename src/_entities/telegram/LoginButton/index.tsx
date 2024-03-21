@@ -1,23 +1,32 @@
 'use client';
-import classNames from 'classnames';
 import styles from './LoginButton.module.scss';
 
 interface Props {
-  className?: string;
+  radius?: number;
+  size?: 'medium' | 'large' | 'small';
+  redirect: string;
+  botName: string;
+  displayAvatar?: boolean;
 }
 
-export const LoginButton = ({ className }: Props) => {
+export const LoginButton = ({
+  botName,
+  redirect,
+  radius = 10,
+  size = 'medium',
+  displayAvatar,
+}: Props) => {
   return (
-    <div className={classNames(styles.wrapper, className)}>
+    <div className={styles.wrapper}>
       <div
         dangerouslySetInnerHTML={{
           __html: `<script async 
           src="https://telegram.org/js/telegram-widget.js?22" 
-          data-telegram-login="${process.env.TG_BOT_NAME}"
-           data-userpic="false" 
-           data-radius="10" 
-           data-size="medium" 
-           data-auth-url="login"
+          data-telegram-login="${botName}"
+           data-userpic="${displayAvatar}" 
+           data-radius="${radius}" 
+           data-size="${size}" 
+           data-auth-url="${redirect}"
            data-request-access="write"></script>`,
         }}
       />

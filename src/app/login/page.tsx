@@ -1,3 +1,3 @@
-import { Login } from '_pages/login/Login';
+import { Login } from '_pages/login';
 
 export default Login;

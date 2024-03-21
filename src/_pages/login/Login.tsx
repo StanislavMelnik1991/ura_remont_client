@@ -1,39 +1,35 @@
-'use client';
-import Image from 'next/image';
-import { telegramLogin } from 'features/auth';
+'use client1';
+import { z } from 'zod';
+import { useTelegramLogin } from 'features/auth';
+import { LoginButton } from '_entities/telegram';
+import { apiRouter } from 'shared/routes';
+import { adminClientRouter } from 'shared/routes/adminClient';
 import styles from './Login.module.scss';
 
 interface Props {
-  params: { slug: string };
-  searchParams: {
-    id: string;
-    first_name: string;
-    username: string;
-    photo_url: string;
-    auth_date: string;
-    hash: string;
-  };
+  searchParams: TgAuthSchemeType;
 }
 
+const { scheme } = apiRouter.auth.telegram;
+
+type TgAuthSchemeType = z.infer<typeof scheme>;
+
 export const Login = ({ searchParams }: Props) => {
-  const { auth_date, first_name, hash, id, photo_url, username } = searchParams;
-  const date = new Date(Number(auth_date));
-  telegramLogin({
-    auth_date: date,
-    first_name,
-    hash,
-    id: Number(id),
-    photo_url,
-    username,
-  });
+  const telegramAuth = adminClientRouter.telegramAuth.baseRoute;
+  const { loading } = useTelegramLogin(searchParams);
   return (
-    <div className={styles.wrapper}>
-      <p>{`id: ${id}`}</p>
-      <p>{`name: ${first_name}`}</p>
-      <p>{`username: ${username}`}</p>
-      <p>{`hash: ${hash}`}</p>
-      <p>{`date: ${date.toDateString()}`}</p>
-      <Image src={photo_url || ''} alt={'avatar'} width={200} height={200} />
+    <div className={styles.main}>
+      {loading ? (
+        <p>{`loading: ${loading}`}</p>
+      ) : (
+        <LoginButton
+          botName={process.env.TG_BOT_NAME as string}
+          redirect={telegramAuth}
+          displayAvatar={false}
+          radius={10}
+          size="large"
+        />
+      )}
     </div>
   );
 };
