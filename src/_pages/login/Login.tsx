@@ -1,4 +1,4 @@
-'use client1';
+'use client';
 import { z } from 'zod';
 import { useTelegramLogin } from 'features/auth';
 import { LoginButton } from '_entities/telegram';
