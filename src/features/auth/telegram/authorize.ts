@@ -11,6 +11,9 @@ const { scheme, baseRoute } = apiRouter.auth.telegram;
 type TgAuthSchemeType = z.infer<typeof scheme>;
 
 export const telegramAuth = async (data: TgAuthSchemeType) => {
+  if (!data) {
+    return;
+  }
   const url = `${process.env.API_URL}/${baseRoute}`;
   const {
     telegramAuth: { baseRoute: telegramAuth },
@@ -33,17 +36,16 @@ export const telegramAuth = async (data: TgAuthSchemeType) => {
         return res.token;
       }
     })
-    .catch((error) => console.error('Error:', error));
+    .catch(() => redirect(telegramAuth));
   if (token) {
     cookies().set({
       name: TOKEN_NAME,
       value: token,
       secure: true,
       httpOnly: true,
+      sameSite: 'strict',
     });
     redirect(adminRoute);
-  } else {
-    redirect(telegramAuth);
   }
 };
 
