@@ -2,13 +2,16 @@ import { redirect } from 'next/navigation';
 import { validateAuth } from 'features/auth';
 import { adminClientRouter } from 'shared/routes/adminClient';
 
-export default async function Home() {
-  const successUrl = adminClientRouter.admin.baseRoute;
+interface Props {
+  children: React.ReactNode;
+}
+
+export const AuthLayout = async ({ children }: Props) => {
   const telegramAuth = adminClientRouter.telegramAuth.baseRoute;
   const { isAuthorize } = await validateAuth();
   if (isAuthorize) {
-    redirect(successUrl);
+    return <>{children}</>;
   } else {
     redirect(telegramAuth);
   }
-}
+};

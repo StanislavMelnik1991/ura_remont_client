@@ -1,4 +1,5 @@
 'use client';
+import { ToastContainer } from 'react-toastify';
 import { useTheme } from 'features/theme';
 import styles from './GlobalLayout.module.scss';
 import { StyledLayout } from './Styled';
@@ -12,7 +13,10 @@ export const GlobalLayout = ({ children }: Props) => {
 
   return (
     <StyledLayout theme={theme}>
-      <main className={styles.scrolling}>{children}</main>
+      <main className={styles.scrolling}>
+        <ToastContainer theme={theme} />
+        {children}
+      </main>
     </StyledLayout>
   );
 };
