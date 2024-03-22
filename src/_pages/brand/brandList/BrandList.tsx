@@ -8,7 +8,7 @@ import styles from './BrandList.module.scss';
 const PER_PAGE = 100;
 
 export const BrandList = () => {
-  const { list, setSearchValue, total, searchValue } = useBrandList(PER_PAGE);
+  const { list, setSearchValue, searchValue } = useBrandList(PER_PAGE);
   return (
     <div className={styles.wrapper}>
       <input
