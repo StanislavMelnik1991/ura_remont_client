@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useBrandList } from 'features/brand/list';
-import { Card } from '_entities/ui/Card/Card';
+import { Card, TextField } from '_entities/ui';
 import { adminClientRouter } from 'shared/routes/adminClient';
 import styles from './BrandList.module.scss';
 
@@ -11,7 +11,8 @@ export const BrandList = () => {
   const { list, setSearchValue, searchValue } = useBrandList(PER_PAGE);
   return (
     <div className={styles.wrapper}>
-      <input
+      <TextField
+        placeholder="Поиск"
         value={searchValue}
         onChange={(ev) => {
           setSearchValue(ev.target.value);
@@ -28,7 +29,6 @@ export const BrandList = () => {
           </Link>
         </Card>
         {list.map((el, index) => {
-          console.log(el);
           return (
             <Card
               className={styles.element}

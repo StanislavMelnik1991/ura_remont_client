@@ -13,7 +13,7 @@ export const GlobalLayout = ({ children }: Props) => {
 
   return (
     <StyledLayout theme={theme}>
-      <main className={styles.scrolling}>
+      <main className={styles.wrapper}>
         <ToastContainer theme={theme} />
         {children}
       </main>

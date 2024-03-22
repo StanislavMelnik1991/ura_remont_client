@@ -1,1 +1,1 @@
-export * from './LoginButton';
+export * from '../../features/auth/telegram/LoginButton';

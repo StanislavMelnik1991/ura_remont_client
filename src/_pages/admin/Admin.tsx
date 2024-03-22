@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { Card } from '_entities/ui/Card/Card';
+import { Card } from '_entities/ui';
 import { adminClientRouter } from 'shared/routes/adminClient';
 import styles from './Admin.module.scss';
 

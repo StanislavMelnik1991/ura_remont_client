@@ -16,6 +16,12 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang={'en'}>
+      <link
+        rel="icon"
+        href="/icons/logo.svg"
+        type="image/<generated>"
+        sizes="<generated>"
+      />
       <body className={inter.className}>
         <GlobalLayout>{children}</GlobalLayout>
       </body>

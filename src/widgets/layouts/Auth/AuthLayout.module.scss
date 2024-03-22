@@ -1,0 +1,26 @@
+.scrolling {
+  height: 100%;
+  overflow: auto;
+  padding: 0 var(--padding-xl);
+  padding-bottom: var(--padding-xl);
+
+  @media screen and (max-width: 1024px) {
+    padding: 0 var(--padding-lg);
+    padding-bottom: var(--padding-lg);
+  }
+
+  @media screen and (max-width: 740px) {
+    padding: 0 var(--padding-md);
+    margin-bottom: var(--padding-md);
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 0 var(--padding-sm);
+    padding-bottom: var(--padding-sm);
+  }
+
+  @media screen and (max-width: 360px) {
+    padding: 0 var(--padding-xs);
+    padding-bottom: var(--padding-xs);
+  }
+}

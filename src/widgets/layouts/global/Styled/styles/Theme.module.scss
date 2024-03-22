@@ -15,14 +15,14 @@
     height: 360px;
     top: calc(50vh - 180px);
     margin-left: -400px;
-    z-index: 1;
+    z-index: 0;
   }
 
   &::after {
     background: var(--primary-glow);
     width: 240px;
     height: 180px;
-    z-index: 2;
+    z-index: 0;
     top: calc(50vh - 90px);
   }
 
