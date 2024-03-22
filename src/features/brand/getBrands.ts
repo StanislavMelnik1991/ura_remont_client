@@ -6,13 +6,12 @@ import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
 import { adminRouter } from 'shared/routes';
 import { adminClientRouter } from 'shared/routes/adminClient';
-import { IBrandLocalized } from 'shared/types';
+import { IBrandFull } from 'shared/types';
 
 const { baseRoute, scheme } = adminRouter.brand.getAll;
 type Props = z.infer<typeof scheme>;
 
 export const getBrands = async (params: Props) => {
-  console.log(params);
   const loginRoute = adminClientRouter.login.baseRoute;
   const token = cookies().get(TOKEN_NAME)?.value;
   if (!token) {
@@ -21,9 +20,9 @@ export const getBrands = async (params: Props) => {
     const { axios } = new Axios(token);
     try {
       const { data } = await axios.get<{
-        data: Array<IBrandLocalized>;
+        data: Array<IBrandFull>;
         total: number;
-      }>(baseRoute, { data: params });
+      }>(baseRoute, { params });
       return data;
     } catch (error) {
       console.log(error);

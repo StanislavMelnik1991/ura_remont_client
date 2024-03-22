@@ -3,7 +3,7 @@
   flex-direction: column;
   min-height: 100%;
   padding-top: var(--padding-xl);
-
+  gap: var(--padding-xl);
 }
 .list {
 
@@ -13,20 +13,20 @@
   width: 100%;
   min-height: 100%;
   gap: var(--padding-xl);
-  :nth-child(n) {
+  >:nth-child(n) {
     width: calc((100% - 2 * var(--padding-xl))/3);
   }
 
   @media screen and (max-width: 1024px) {
     gap: var(--padding-lg);
-    :nth-child(n) {
+    >:nth-child(n) {
       width: calc((100% - var(--padding-lg))/2);
     }
   }
 
   @media screen and (max-width: 740px) {
     gap: var(--padding-md);
-    :nth-child(n) {
+    >:nth-child(n) {
       width: 100%;
     }
   }
@@ -43,4 +43,13 @@
 .element {
   height: 500px;
   min-width: 240px;
+  position: relative;
+  overflow: hidden;
+}
+.link {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
