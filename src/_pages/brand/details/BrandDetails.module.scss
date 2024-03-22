@@ -5,8 +5,19 @@
   padding-top: var(--padding-xl);
   gap: var(--padding-xl);
 }
-.list {
 
+.card {
+  display: flex;
+  gap: var(--padding-xl);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-xs);
+}
+
+.list {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -45,11 +56,4 @@
   min-width: 240px;
   position: relative;
   overflow: hidden;
-}
-.link {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
