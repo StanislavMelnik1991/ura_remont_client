@@ -4,11 +4,12 @@ import { cookies } from 'next/headers';
 import { z } from 'zod';
 import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
-import { apiRouter } from 'shared/routes';
+import { apiRouter } from 'shared/router';
+import { authTelegramScheme } from 'shared/schemas';
 
-const { scheme, baseRoute } = apiRouter.auth.telegram;
+const { route } = apiRouter.auth.tgLogin;
 
-type TgAuthSchemeType = z.infer<typeof scheme>;
+type TgAuthSchemeType = z.infer<typeof authTelegramScheme>;
 
 export const telegramAuth = async (data: TgAuthSchemeType) => {
   const oldToken = cookies().get(TOKEN_NAME)?.value;
@@ -16,7 +17,7 @@ export const telegramAuth = async (data: TgAuthSchemeType) => {
   try {
     const {
       data: { token },
-    } = await axios.post<ResponseType>(baseRoute, data);
+    } = await axios.post<ResponseType>(route, data);
     cookies().set({
       name: TOKEN_NAME,
       value: token,

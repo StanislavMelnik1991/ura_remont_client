@@ -20,12 +20,12 @@ const nextConfig = {
         hostname: 't.me',
       },
       {
-        protocol: 'https',
-        hostname: 'img.youtube.com',
+        protocol: 'http',
+        hostname: 'localhost',
       },
       {
         protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com',
+        hostname: 'api.ship.cloudns.be',
       },
     ],
   },

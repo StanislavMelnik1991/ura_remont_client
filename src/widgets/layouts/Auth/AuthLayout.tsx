@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { validateAuth } from 'features/auth';
-import { adminClientRouter } from 'shared/routes/adminClient';
+import { adminClientRouter } from 'shared/router';
 import styles from './AuthLayout.module.scss';
 import { Header } from './Header';
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const AuthLayout = async ({ children }: Props) => {
-  const telegramAuth = adminClientRouter.login.baseRoute;
+  const telegramAuth = adminClientRouter.auth.login.route;
   const { isAuthorize } = await validateAuth();
   if (isAuthorize) {
     return (

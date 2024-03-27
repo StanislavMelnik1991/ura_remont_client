@@ -4,15 +4,16 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
-import { adminRouter } from 'shared/routes';
-import { adminClientRouter } from 'shared/routes/adminClient';
+import { adminRouter } from 'shared/router';
+import { adminClientRouter } from 'shared/router';
+import { brandGetAllScheme } from 'shared/schemas';
 import { IBrandFull } from 'shared/types';
 
-const { baseRoute, scheme } = adminRouter.brand.getAll;
-type Props = z.infer<typeof scheme>;
+const { route } = adminRouter.brand.getAll;
+type Props = z.infer<typeof brandGetAllScheme>;
 
 export const getBrands = async (params: Props) => {
-  const loginRoute = adminClientRouter.login.baseRoute;
+  const loginRoute = adminClientRouter.auth.login.route;
   const token = cookies().get(TOKEN_NAME)?.value;
   if (!token) {
     redirect(loginRoute);
@@ -22,7 +23,7 @@ export const getBrands = async (params: Props) => {
       const { data } = await axios.get<{
         data: Array<IBrandFull>;
         total: number;
-      }>(baseRoute, { params });
+      }>(route, { params });
       return data;
     } catch (error) {
       console.log(error);

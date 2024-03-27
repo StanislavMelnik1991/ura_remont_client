@@ -1,3 +1,3 @@
-import { BrandList } from '_pages/brand';
+import { BrandListPage } from '_pages/brand';
 
-export default BrandList;
+export default BrandListPage;

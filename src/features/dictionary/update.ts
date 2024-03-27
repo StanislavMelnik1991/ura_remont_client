@@ -4,14 +4,15 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
-import { adminRouter } from 'shared/routes';
-import { adminClientRouter } from 'shared/routes/adminClient';
+import { adminRouter } from 'shared/router';
+import { adminClientRouter } from 'shared/router';
+import { dictionaryUpdateScheme } from 'shared/schemas';
 
-const { getRoute, scheme } = adminRouter.dictionary.current.update;
-type Props = z.infer<typeof scheme> & { id: number };
+const { getRoute } = adminRouter.dictionary.update;
+type Props = z.infer<typeof dictionaryUpdateScheme> & { id: number };
 
 export const updateDictionary = async ({ id, ...body }: Props) => {
-  const loginRoute = adminClientRouter.login.baseRoute;
+  const loginRoute = adminClientRouter.auth.login.route;
   const token = cookies().get(TOKEN_NAME)?.value;
   if (!token) {
     redirect(loginRoute);

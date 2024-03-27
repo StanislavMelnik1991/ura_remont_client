@@ -1,6 +1,7 @@
 'use client';
 import classNames from 'classnames';
 import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
 import { updateDictionary } from 'features/dictionary';
 import { Card, TextField } from '_entities/ui';
 import { Button } from '_entities/ui/Button/Button';
@@ -25,6 +26,7 @@ export const DictionaryEditor = ({ className, dictionary, title }: Props) => {
     setSuccess(false);
     updateDictionary({ be, en, id: dictionary.id, pl, ru, uk })
       .then(() => {
+        toast.info('Обновлено успешно');
         setSuccess(true);
       })
       .catch((er) => console.error(er));

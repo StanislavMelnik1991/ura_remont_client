@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getDetails } from 'features/brand/details';
 import { Card } from '_entities/ui';
-import { adminClientRouter } from 'shared/routes/adminClient';
+import { adminClientRouter } from 'shared/router';
 import styles from './BrandDetails.module.scss';
 import { DictionaryEditor } from './DictionaryEditor/DictionaryEditor';
 
@@ -15,7 +15,7 @@ export const BrandDetails = async ({ params: { brandId } }: Props) => {
   }
   const brand = await getDetails(Number(brandId));
   if (!brand) {
-    redirect(adminClientRouter.admin.brand.baseRoute);
+    redirect(adminClientRouter.brand.list.route);
   }
   const { name, description, images } = brand;
   return (

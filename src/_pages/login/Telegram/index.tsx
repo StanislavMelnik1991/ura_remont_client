@@ -2,15 +2,13 @@
 import { z } from 'zod';
 import { useTelegramLogin } from 'features/auth';
 import { Spinner } from '_entities/ui';
-import { apiRouter } from 'shared/routes';
+import { authTelegramScheme } from 'shared/schemas';
 
 interface Props {
   searchParams: TgAuthSchemeType;
 }
 
-const { scheme } = apiRouter.auth.telegram;
-
-type TgAuthSchemeType = z.infer<typeof scheme>;
+type TgAuthSchemeType = z.infer<typeof authTelegramScheme>;
 
 export const Telegram = ({ searchParams }: Props) => {
   useTelegramLogin(searchParams);

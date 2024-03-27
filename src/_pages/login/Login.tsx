@@ -1,10 +1,10 @@
 'use client';
 import { TelegramLoginButton } from 'features/auth';
-import { adminClientRouter } from 'shared/routes/adminClient';
+import { adminClientRouter } from 'shared/router';
 import styles from './Login.module.scss';
 
 export const Login = () => {
-  const telegramAuth = adminClientRouter.login.telegramAuth.baseRoute;
+  const telegramAuth = adminClientRouter.auth.authTelegram.route;
   return (
     <div className={styles.wrapper}>
       <TelegramLoginButton

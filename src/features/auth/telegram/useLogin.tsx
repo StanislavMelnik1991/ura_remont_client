@@ -2,18 +2,20 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
-import { apiRouter } from 'shared/routes';
-import { adminClientRouter } from 'shared/routes/adminClient';
+import { adminClientRouter } from 'shared/router';
+import { authTelegramScheme } from 'shared/schemas';
 import { telegramAuth } from './authorize';
 
-const { scheme } = apiRouter.auth.telegram;
-
-type TgAuthSchemeType = z.infer<typeof scheme>;
+type TgAuthSchemeType = z.infer<typeof authTelegramScheme>;
 
 export const useTelegramLogin = (data?: TgAuthSchemeType) => {
   const {
-    login: { baseRoute: loginRoute },
-    admin: { baseRoute: adminRoute },
+    auth: {
+      login: { route: loginRoute },
+    },
+    common: {
+      home: { route: adminRoute },
+    },
   } = adminClientRouter;
   const [loading, setLoading] = useState(true);
   const router = useRouter();
