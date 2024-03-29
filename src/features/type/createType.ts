@@ -4,15 +4,17 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
-import { CustomError } from '_entities/types';
+import { CustomError, FormattedError } from '_entities/types';
 import { adminRouter } from 'shared/router';
 import { adminClientRouter } from 'shared/router';
-import { dictionaryUpdateScheme } from 'shared/schemas';
+import { brandCreateScheme } from 'shared/schemas';
 
-const { getRoute } = adminRouter.dictionary.update;
-type Props = z.infer<typeof dictionaryUpdateScheme> & { id: number };
+type CreationFunction = (
+  body: z.infer<typeof brandCreateScheme>,
+) => Promise<{ id: number } | FormattedError>;
 
-export const updateDictionary = async ({ id, ...body }: Props) => {
+export const createType: CreationFunction = async (body) => {
+  const { route } = adminRouter.type.create;
   const loginRoute = adminClientRouter.auth.login.route;
   const token = cookies().get(TOKEN_NAME)?.value;
   if (!token) {
@@ -20,7 +22,7 @@ export const updateDictionary = async ({ id, ...body }: Props) => {
   } else {
     const { axios } = new Axios(token);
     try {
-      const { data } = await axios.patch<{ id: number }>(getRoute(id), body);
+      const { data } = await axios.post<{ id: number }>(route, body);
       return data;
     } catch (error) {
       const {

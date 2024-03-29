@@ -1,3 +1,4 @@
+'use server';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Axios } from '_entities/axios/instance';
@@ -6,7 +7,7 @@ import { adminRouter } from 'shared/router';
 import { adminClientRouter } from 'shared/router';
 import { IBrandFull } from 'shared/types';
 
-export const getDetails = async (id: number) => {
+export const getBrandDetails = async (id: number) => {
   const { getRoute } = adminRouter.brand.getOne;
   const route = getRoute(id);
   const loginRoute = adminClientRouter.auth.login.route;

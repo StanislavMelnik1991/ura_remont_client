@@ -3,13 +3,13 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
-import { CustomError } from '_entities/types';
 import { adminRouter } from 'shared/router';
 import { adminClientRouter } from 'shared/router';
+import { IBrandFull } from 'shared/types';
 
-const { getRoute } = adminRouter.brand.deleteOne;
-
-export const deleteBrand = async (id: number) => {
+export const getTypeDetails = async (id: number) => {
+  const { getRoute } = adminRouter.type.getOne;
+  const route = getRoute(id);
   const loginRoute = adminClientRouter.auth.login.route;
   const token = cookies().get(TOKEN_NAME)?.value;
   if (!token) {
@@ -17,17 +17,11 @@ export const deleteBrand = async (id: number) => {
   } else {
     const { axios } = new Axios(token);
     try {
-      const { data } = await axios.delete(getRoute(id));
+      const { data } = await axios.get<IBrandFull>(route);
       return data;
     } catch (error) {
-      const {
-        data: { message },
-        status,
-        statusText,
-      } = (error as CustomError).response;
-      if ((error as { response: any }).response) {
-        return { error: { message, status, statusText } };
-      }
+      console.log(error);
+      return;
     }
   }
 };

@@ -1,18 +1,18 @@
 'use server';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { z } from 'zod';
 import { Axios } from '_entities/axios/instance';
 import { TOKEN_NAME } from '_entities/constants';
 import { CustomError } from '_entities/types';
-import { adminRouter } from 'shared/router';
-import { adminClientRouter } from 'shared/router';
-import { dictionaryUpdateScheme } from 'shared/schemas';
+import { adminClientRouter, adminRouter } from 'shared/router';
 
-const { getRoute } = adminRouter.dictionary.update;
-type Props = z.infer<typeof dictionaryUpdateScheme> & { id: number };
+interface Props {
+  formData: FormData;
+  id: number;
+}
 
-export const updateDictionary = async ({ id, ...body }: Props) => {
+export const uploadBrandImage = async ({ formData, id }: Props) => {
+  const { getRoute } = adminRouter.brand.uploadImage;
   const loginRoute = adminClientRouter.auth.login.route;
   const token = cookies().get(TOKEN_NAME)?.value;
   if (!token) {
@@ -20,7 +20,15 @@ export const updateDictionary = async ({ id, ...body }: Props) => {
   } else {
     const { axios } = new Axios(token);
     try {
-      const { data } = await axios.patch<{ id: number }>(getRoute(id), body);
+      const { data } = await axios.post<{ id: number }>(
+        getRoute(id),
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
       return data;
     } catch (error) {
       const {
@@ -29,7 +37,6 @@ export const updateDictionary = async ({ id, ...body }: Props) => {
         statusText,
       } = (error as CustomError).response;
       if ((error as { response: any }).response) {
-        console.log(error);
         return { error: { message, status, statusText } };
       } else {
         return {

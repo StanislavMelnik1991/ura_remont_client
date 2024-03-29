@@ -1,8 +1,37 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.6rem;
+  line-height: 1rem;
+  opacity: 0.5;
+  padding: 0 var(--padding-md);
+
+  &.error {
+    opacity: 1;
+  }
+}
+
+.input {
+  display: flex;
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius:  var(--border-radius-sm);
   background-color: rgba(var(--callout-rgb), 0.5);
   padding: var(--padding-sm) var(--padding-md);
   color: rgb(var(--foreground-rgb));
+
+  &.error {
+    border-color: rgb(var(--warning-rgb));
+  }
+
+}
+
+.error {
+  color: rgb(var(--warning-rgb));
+
+  &::placeholder{
+    color: rgb(var(--warning-rgb));
+  }
 }
